@@ -2,9 +2,9 @@ package com.slomaxonical.croptopia.chocolaterie;
 
 import com.slomaxonical.croptopia.chocolaterie.registry.BlockRegistry;
 import com.slomaxonical.croptopia.chocolaterie.registry.ItemRegistry;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -15,7 +15,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class CroptopiaChocolaterie {
 
     public static final String MOD_ID = "cacao";
-    public static CreativeModeTab CHOCOLATERIE_ITEM_GROUP;
+    public static ItemGroup CHOCOLATERIE_ITEM_GROUP;
 
 
     public CroptopiaChocolaterie(){
@@ -26,7 +26,7 @@ public class CroptopiaChocolaterie {
 //        modBus.addListener(this::gatherData);
 
         MinecraftForge.EVENT_BUS.register(this);
-        CHOCOLATERIE_ITEM_GROUP = new CreativeModeTab("cacao") {
+        CHOCOLATERIE_ITEM_GROUP = new ItemGroup("cacao") {
             @Override
             public ItemStack makeIcon() {
                 return new ItemStack(ItemRegistry.CARAMEL_MILK_CHOCOLATE.get());
@@ -39,10 +39,4 @@ public class CroptopiaChocolaterie {
 //        event.getGenerator().addProvider(new CacaoRecipes(event.getGenerator()));
 //        event.getGenerator().addProvider(new CacaoItemTags(event.getGenerator(),provider, event.getExistingFileHelper()));
 //    }
-    @SubscribeEvent
-   // public void onServerStarting(ServerStartingEvent event){}//Do something when the server starts
-
-    public static Item.Properties createGroup() {
-        return new Item.Properties().tab(CHOCOLATERIE_ITEM_GROUP);
-    }
 }

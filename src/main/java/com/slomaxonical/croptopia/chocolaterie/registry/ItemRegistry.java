@@ -2,17 +2,13 @@ package com.slomaxonical.croptopia.chocolaterie.registry;
 
 import com.slomaxonical.croptopia.chocolaterie.CroptopiaChocolaterie;
 import me.thonk.croptopia.items.CookingUtensil;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
+import net.minecraft.item.*;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
-import static com.slomaxonical.croptopia.chocolaterie.CroptopiaChocolaterie.createGroup;
 import static me.thonk.croptopia.registry.FoodRegistry.*;
 
 public class ItemRegistry {
@@ -57,12 +53,12 @@ public class ItemRegistry {
     public static RegistryObject<Item> COCONUT_WHITE_CHOCOLATE = ITEMS.register("coconut_white_chocolate",() -> new Item(createGroup().food(EDIBLE_7)));
     public static RegistryObject<Item> PEANUT_BUTTER_WHITE_CHOCOLATE = ITEMS.register("peanut_butter_white_chocolate",() -> new Item(createGroup().food(EDIBLE_7)));
 
-    public static RegistryObject<Item> GOLDEN_CHOCOLATE = ITEMS.register("golden_chocolate",() -> new Item(createGroup().food(new FoodProperties.Builder()
+    public static RegistryObject<Item> GOLDEN_CHOCOLATE = ITEMS.register("golden_chocolate",() -> new Item(createGroup().rarity(Rarity.RARE).food(new Food.Builder()
             .nutrition(5)
             .saturationMod(0.75f)
-            .effect(()-> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 400, 1), 1.0f)
-            .effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 1200, 1), 0.65f)
-            .effect(()-> new MobEffectInstance(MobEffects.REGENERATION, 120, 2), 0.8f)
+            .effect(()-> new EffectInstance(Effects.MOVEMENT_SPEED, 400, 1), 1.0f)
+            .effect(() -> new EffectInstance(Effects.ABSORPTION, 1200, 1), 0.65f)
+            .effect(()-> new EffectInstance(Effects.REGENERATION, 120, 2), 0.8f)
             .alwaysEat()
             .build())));
     public static RegistryObject<Item> DARK_CHOCOLATE_COVERED_APPLE = ITEMS.register("dark_chocolate_covered_apple",() -> new Item(createGroup().food(EDIBLE_5)));
@@ -74,4 +70,7 @@ public class ItemRegistry {
     public static RegistryObject<Item> NUTELLA = ITEMS.register("nutella",() -> new Item(createGroup().food(EDIBLE_9)));
 
     public static RegistryObject<Item> CHOCOLATE_CAKE = ITEMS.register("chocolate_cake",() -> new BlockItem(BlockRegistry.CHOCOLATE_CAKE.get(), createGroup().stacksTo(1)));
+    public static Item.Properties createGroup() {
+        return (new Item.Properties()).tab(CroptopiaChocolaterie.CHOCOLATERIE_ITEM_GROUP);
+    }
 }
